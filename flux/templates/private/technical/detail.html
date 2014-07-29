@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Detalle </h1>
+    Id : {{ tech.id }} <br/><br/><br/>
+    Rut : {{ tech.rut }} <br/><br/><br/>
+<br/><br/><br/>
+<a href="{% url 'technical_list'%}">Volver a lista</a>
+
+{% endblock %}

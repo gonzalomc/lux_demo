@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Lista de Clientes</h2>
+    <hr/>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr>
+                <td>{{ client.name }}</td>
+                <td>{{ client.address }}</td>
+                <td>
+                {% if perms.webapp.change_client %}
+                    <a href="#">Detalle Cliente</a> -
+                {% endif %}
+                {% if perms.webapp.delete_client %}
+                    <button>Eliminar Cliente</button>
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

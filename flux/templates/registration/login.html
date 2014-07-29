@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Flux - Login</title>
+</head>
+<style>
+    .login-form{
+        width : 300px;
+        margin : 0 auto;
+        border : 10px solid blue;
+        padding : 30px;
+    }
+</style>
+<body>
+
+<div id="login-form" class="login-form">
+    {% if form.errors %}
+        <p>Error al iniciar sesión. Ingrese datos nuevamente</p>
+    {% endif %}
+
+    <form action="#" method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Usuario"/><br/>
+        <input type="password" name="password" placeholder="Password"/><br/>
+
+        <button type="submit">Iniciar Sesión</button>
+
+    </form>
+</div>
+
+
+</body>
+</html>

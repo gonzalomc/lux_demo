@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Lista de Técnicos</h2>
+    <hr/>
+
+    {% if perms.webapp.add_technical %}
+        <a href="{% url 'technical_create' %}" class="btn btn-info btn-sm">Agregar técnico</a>
+    {% endif %}<br/><br/><br/>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Rut</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for tech in techs %}
+            <tr>
+                <td>{{ tech.name }}</td>
+                <td>{{ tech.rut }}</td>
+                <td>
+                    {% if perms.webapp.change_technical %}
+                        <a href="{% url 'technical_detail' tech.id %}" class="btn btn-info btn-xs">Detalle Técnico</a> -
+                    {% endif %}
+                    {% if perms.webapp.delete_technical %}
+                        <button>Eliminar Técnico</button>
+                    {% endif %}
+                    </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}}
+{% block content %}
+<!-- Comentario de lista de permisos
+{{ perms.webapp }}
+-->
+    <h2>Lista Orden de Trabajo</h2>
+    <hr/>
+
+    <!-- Verificamos si el usuario tiene permiso para agregar ot -->
+
+    {% if perms.webapp.add_ot %}
+        <a href="{% url 'ot_create' %}" class="btn btn-info btn-sm">Agregar Orden de Trabajo</a>
+    {% endif %}
+    <br/><br/>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <th>Nº Ot</th>
+            <th>Detalle</th>
+            <th>Acciones</th>
+        </thead>
+
+        {% for ot_detail in ot_list %}
+            <tr>
+                <td>{{ ot_detail.id }}</td>
+                <td>{{ ot_detail.description|truncatechars:50 }}</td>
+                <td>
+                {% if perms.webapp.view_ot %}
+                    <a href="{% url 'ot_detail' ot_detail.id %}" class="btn btn-info btn-xs">Ver</a>&nbsp;
+                {% endif %}
+                {% if perms.webapp.change_ot %}
+                    <a href="{% url 'ot_update' ot_detail.id %}" class="btn btn-success btn-xs">Editar</a>&nbsp;
+                {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Anterior</a> -
+                {% endif %}
+                <span class="page-current">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }} -
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+{% endblock %}

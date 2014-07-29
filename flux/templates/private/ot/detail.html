@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2>Detalle Ot # {{ ot.id }}</h2><br/>
+    <div class="col-lg-6">
+    Descripción : {{ ot.description }}<br/><br/>
+    Productos Usados :
+        {% for product in ot.products.all %}
+            <button class="btn btn-success btn-xs">{{ product.name }}</button>
+        {% endfor %}
+    </div>
+    <br/><br/><br/><br/>
+    <a href="{% url 'ot_list' %}" class="btn btn-info">Volver a lista de Ot</a>
+{% endblock %}

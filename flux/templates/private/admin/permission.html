@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load guardian_tags %}
+    <h1>Lista de Permisos</h1>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <td>Nombre Grupo Perfil</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        {% for d in groups %}
+        <tr>
+            <td>{{ d.name }}</td>
+            <td><a href="#" class="btn btn-info btn-xs">Editar</a></td>
+            <td><a href="{% url 'group_permissions' d.id %}" class="btn btn-info btn-xs">Ver Permisos</a></td>
+            <td><a href="#" class="btn btn-info btn-xs">Ver Usuarios</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
